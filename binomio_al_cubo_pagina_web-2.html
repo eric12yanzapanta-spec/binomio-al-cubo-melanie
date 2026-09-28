@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binomio al Cubo | Matemáticas</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+  line-height:1.6;
+}
+header{
+  position:sticky;top:0;z-index:1000;
+  background:#162447;
+  color:white;
+  box-shadow:0 3px 12px #0003;
+}
+.nav{
+  max-width:1150px;margin:auto;padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:15px;
+}
+.logo{font-size:1.25rem;font-weight:bold}
+nav a{
+  color:white;text-decoration:none;margin-left:14px;font-size:.92rem;
+}
+nav a:hover{text-decoration:underline}
+.progress{
+  height:5px;background:#55c2ff;width:0%;
+}
+.hero{
+  background:linear-gradient(135deg,#162447,#1f6feb);
+  color:white;padding:75px 20px;text-align:center;
+}
+.hero h1{font-size:clamp(2.3rem,6vw,4.5rem);margin:0 0 12px}
+.hero p{max-width:760px;margin:0 auto 25px;font-size:1.15rem}
+.badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.badge{
+  background:#ffffff22;border:1px solid #ffffff55;
+  border-radius:30px;padding:8px 16px;
+}
+.btn{
+  display:inline-block;border:0;border-radius:10px;
+  background:#162447;color:white;padding:11px 18px;
+  text-decoration:none;font-weight:bold;cursor:pointer;
+}
+.btn:hover{transform:translateY(-1px)}
+.container{max-width:1150px;margin:auto;padding:35px 20px}
+section{
+  background:white;border-radius:18px;padding:30px;
+  margin-bottom:28px;box-shadow:0 7px 25px #16244712;
+}
+h2{color:#162447;margin-top:0;font-size:1.9rem}
+h3{color:#1f6feb}
+.card-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;
+}
+.card{
+  background:#f7f9fd;border:1px solid #e2e8f2;
+  border-radius:14px;padding:20px;
+}
+.formula{
+  text-align:center;background:#eef5ff;border-left:5px solid #1f6feb;
+  border-radius:10px;padding:20px;margin:18px 0;
+  font-size:1.45rem;font-weight:bold;overflow:auto;
+}
+.steps li{margin-bottom:8px}
+.example{
+  border-left:5px solid #16a085;background:#f1fbf8;
+  padding:18px;border-radius:10px;margin:15px 0;
+}
+.result{
+  background:#162447;color:white;border-radius:10px;
+  padding:14px;text-align:center;font-weight:bold;
+}
+table{width:100%;border-collapse:collapse;margin:15px 0}
+th,td{padding:11px;border:1px solid #d9e0eb;text-align:left}
+th{background:#162447;color:white}
+.playground{
+  display:grid;grid-template-columns:1fr 1fr;gap:22px;
+}
+.controls{
+  background:#f7f9fd;border-radius:14px;padding:22px;
+}
+input[type=number],select{
+  width:100%;padding:11px;margin:6px 0 14px;
+  border:1px solid #cbd5e1;border-radius:8px;font-size:1rem;
+}
+.output{
+  background:#162447;color:white;border-radius:14px;
+  padding:24px;display:flex;flex-direction:column;
+  justify-content:center;min-height:260px;
+}
+.output .formula{background:#ffffff18;color:white;border:0}
+.exercise{
+  border:1px solid #dce3ed;border-radius:12px;
+  margin:12px 0;overflow:hidden;
+}
+.exercise button{
+  width:100%;padding:15px;text-align:left;border:0;
+  background:#f7f9fd;font-weight:bold;cursor:pointer;
+}
+.solution{display:none;padding:18px;background:white}
+.exercise.open .solution{display:block}
+.warning{
+  background:#fff7df;border-left:5px solid #e5a500;
+  padding:18px;border-radius:8px;
+}
+.quiz-question{
+  border:1px solid #e0e6ef;border-radius:12px;padding:18px;margin:15px 0;
+}
+.quiz-question label{display:block;margin:8px 0}
+footer{
+  background:#162447;color:white;text-align:center;padding:35px 20px;
+}
+@media(max-width:750px){
+  nav{display:none}
+  .playground{grid-template-columns:1fr}
+  section{padding:22px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">📘 Matemáticas | Binomio al Cubo</div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#fundamentos">Fundamentos</a>
+      <a href="#teoria">Teoría</a>
+      <a href="#interactivo">Interactivo</a>
+      <a href="#ejercicios">Ejercicios</a>
+      <a href="#evaluacion">Evaluación</a>
+    </nav>
+  </div>
+  <div class="progress" id="progress"></div>
+</header>
+
+<main>
+
+<!-- BLOQUE 2 -->
+<section class="hero" id="inicio">
+  <h1>Binomio al Cubo</h1>
+  <p>
+    Aprende a desarrollar expresiones de la forma (a ± b)³ utilizando
+    una fórmula sencilla, ejemplos paso a paso y ejercicios interactivos.
+  </p>
+  <div class="badges">
+    <span class="badge">⏱ 15 min</span>
+    <span class="badge">📚 Nivel: Básico–Intermedio</span>
+    <span class="badge">✏️ Álgebra</span>
+  </div>
+  <br>
+  <a class="btn" href="#fundamentos">Comenzar lección</a>
+</section>
+
+<div class="container">
+
+<!-- BLOQUE 3 -->
+<section id="fundamentos">
+  <h2>1. Fundamentación: ¿qué necesitamos saber?</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>¿Qué es un binomio?</h3>
+      <p>Un binomio es una expresión algebraica formada por dos términos.</p>
+      <div class="formula">a + b</div>
+    </div>
+    <div class="card">
+      <h3>¿Qué significa elevar al cubo?</h3>
+      <p>Significa multiplicar la expresión tres veces por sí misma.</p>
+      <div class="formula">(a + b)³ = (a + b)(a + b)(a + b)</div>
+    </div>
+  </div>
+
+  <h3>Algoritmo básico</h3>
+  <ol class="steps">
+    <li>Identifica los valores de <b>a</b> y <b>b</b>.</li>
+    <li>Observa si el binomio es una suma o una resta.</li>
+    <li>Aplica la fórmula correspondiente.</li>
+    <li>Reduce y ordena los términos semejantes.</li>
+  </ol>
+
+  <div class="example">
+    <b>Ejemplo flash:</b>
+    <div class="formula">(x + 2)³ = x³ + 6x² + 12x + 8</div>
+  </div>
+</section>
+
+<!-- BLOQUE 4 -->
+<section id="teoria">
+  <h2>2. Marco teórico</h2>
+
+  <h3>Binomio al cubo de una suma</h3>
+  <div class="formula">(a + b)³ = a³ + 3a²b + 3ab² + b³</div>
+
+  <h3>Binomio al cubo de una resta</h3>
+  <div class="formula">(a − b)³ = a³ − 3a²b + 3ab² − b³</div>
+
+  <h3>Regla para recordar</h3>
+  <table>
+    <tr><th>Término</th><th>Forma</th></tr>
+    <tr><td>Primero</td><td>a³</td></tr>
+    <tr><td>Segundo</td><td>3a²b</td></tr>
+    <tr><td>Tercero</td><td>3ab²</td></tr>
+    <tr><td>Cuarto</td><td>b³</td></tr>
+  </table>
+
+  <div class="example">
+    <h3>Ejemplo de tu cuaderno</h3>
+    <div class="formula">(x − 2)³</div>
+    <p>
+      = x³ − 3(x)²(2) + 3(x)(2)² − 2³
+    </p>
+    <p>
+      = x³ − 6x² + 12x − 8
+    </p>
+    <div class="result">Resultado: x³ − 6x² + 12x − 8</div>
+  </div>
+
+  <h3>Glosario rápido</h3>
+  <div class="card-grid">
+    <div class="card"><b>a:</b> primer término del binomio.</div>
+    <div class="card"><b>b:</b> segundo término del binomio.</div>
+    <div class="card"><b>³:</b> indica que la expresión se eleva al cubo.</div>
+    <div class="card"><b>3:</b> coeficiente que aparece en los términos centrales.</div>
+  </div>
+</section>
+
+<!-- BLOQUE 5 -->
+<section id="interactivo">
+  <h2>3. Simulador interactivo</h2>
+  <p>Cambia los valores y observa cómo se desarrolla el binomio al cubo.</p>
+
+  <div class="playground">
+    <div class="controls">
+      <label><b>Valor de a:</b></label>
+      <input type="number" id="a" value="2">
+
+      <label><b>Valor de b:</b></label>
+      <input type="number" id="b" value="3">
+
+      <label><b>Operación:</b></label>
+      <select id="signo">
+        <option value="+">Suma (+)</option>
+        <option value="-">Resta (−)</option>
+      </select>
+
+      <button class="btn" onclick="calcular()">Calcular</button>
+    </div>
+
+    <div class="output" id="resultado">
+      <h3 style="color:white">Resultado</h3>
+      <div id="pasos">Presiona “Calcular”.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOQUE 6 -->
+<section id="ejercicios">
+  <h2>4. Banco de ejercicios resueltos</h2>
+
+  <div class="exercise">
+    <button onclick="toggle(this)">Nivel 0 — (x + 2)³ ▾</button>
+    <div class="solution">
+      <p>(x + 2)³ = x³ + 3x²(2) + 3x(2²) + 2³</p>
+      <p>(x + 2)³ = x³ + 6x² + 12x + 8</p>
+      <div class="result">Respuesta: x³ + 6x² + 12x + 8</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <button onclick="toggle(this)">Nivel 1 — (x − 3)³ ▾</button>
+    <div class="solution">
+      <p>(x − 3)³ = x³ − 3x²(3) + 3x(3²) − 3³</p>
+      <p>(x − 3)³ = x³ − 9x² + 27x − 27</p>
+      <div class="result">Respuesta: x³ − 9x² + 27x − 27</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <button onclick="toggle(this)">Nivel 2 — (2x + 3)³ ▾</button>
+    <div class="solution">
+      <p>
+        (2x + 3)³ = (2x)³ + 3(2x)²(3) + 3(2x)(3²) + 3³
+      </p>
+      <p>
+        = 8x³ + 36x² + 54x + 27
+      </p>
+      <div class="result">Respuesta: 8x³ + 36x² + 54x + 27</div>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <button onclick="toggle(this)">Nivel 3 — (3a − 2b)³ ▾</button>
+    <div class="solution">
+      <p>
+        (3a − 2b)³ = (3a)³ − 3(3a)²(2b)
+        + 3(3a)(2b)² − (2b)³
+      </p>
+      <p>
+        = 27a³ − 54a²b + 36ab² − 8b³
+      </p>
+      <div class="result">Respuesta: 27a³ − 54a²b + 36ab² − 8b³</div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOQUE 7 -->
+<section id="evaluacion">
+  <h2>5. Práctica autónoma y evaluación</h2>
+
+  <div class="warning">
+    <b>⚠ Errores comunes</b>
+    <ul>
+      <li>Olvidar los coeficientes 3 de los términos centrales.</li>
+      <li>Confundir el signo de los términos cuando el binomio es una resta.</li>
+      <li>Escribir b² o b³ incorrectamente.</li>
+      <li>No elevar correctamente cada término a la potencia indicada.</li>
+    </ul>
+  </div>
+
+  <h3>Ejercicios para practicar</h3>
+  <div class="card-grid">
+    <div class="card"><b>1.</b> (x + 4)³</div>
+    <div class="card"><b>2.</b> (x − 5)³</div>
+    <div class="card"><b>3.</b> (2x + 1)³</div>
+    <div class="card"><b>4.</b> (3a − b)³</div>
+  </div>
+
+  <h3>Mini-test</h3>
+
+  <div class="quiz-question">
+    <b>1. ¿Cuál es la fórmula de (a + b)³?</b>
+    <label><input type="radio" name="q1" value="a"> a³ + 3a²b + 3ab² + b³</label>
+    <label><input type="radio" name="q1" value="b"> a³ + a²b + ab² + b³</label>
+  </div>
+
+  <div class="quiz-question">
+    <b>2. ¿Cuál es el resultado de (x − 2)³?</b>
+    <label><input type="radio" name="q2" value="a"> x³ − 6x² + 12x − 8</label>
+    <label><input type="radio" name="q2" value="b"> x³ − 6x² − 12x − 8</label>
+  </div>
+
+  <div class="quiz-question">
+    <b>3. ¿Cuántos términos tiene el desarrollo de un binomio al cubo?</b>
+    <label><input type="radio" name="q3" value="a"> 4</label>
+    <label><input type="radio" name="q3" value="b"> 3</label>
+  </div>
+
+  <button class="btn" onclick="evaluar()">Verificar respuestas</button>
+  <div id="nota" style="margin-top:15px;font-weight:bold"></div>
+</section>
+
+<!-- BLOQUE 8 -->
+<section id="recursos">
+  <h2>6. Recursos y navegación</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>📄 Guía teórica</h3>
+      <p>Consulta las fórmulas y pasos principales del binomio al cubo.</p>
+    </div>
+    <div class="card">
+      <h3>✏️ Hoja de ejercicios</h3>
+      <p>Practica los ejercicios de los diferentes niveles.</p>
+    </div>
+    <div class="card">
+      <h3>✅ Solucionario</h3>
+      <p>Comprueba tus procedimientos después de resolverlos.</p>
+    </div>
+    <div class="card">
+      <h3>📚 Tema siguiente</h3>
+      <p>Continúa con otros productos notables y operaciones algebraicas.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <h3 style="color:white">Binomio al Cubo</h3>
+  <p>Página educativa de Matemáticas · Álgebra</p>
+  <p>Proyecto académico</p>
+</footer>
+
+<script>
+function toggle(btn){
+  btn.parentElement.classList.toggle("open");
+}
+
+function calcular(){
+  const a=Number(document.getElementById("a").value);
+  const b=Number(document.getElementById("b").value);
+  const s=document.getElementById("signo").value;
+
+  let valor, termino;
+  if(s==="+"){
+    valor=(a+b)**3;
+    termino=`${a}³ + 3(${a})²(${b}) + 3(${a})(${b})² + ${b}³`;
+  }else{
+    valor=(a-b)**3;
+    termino=`${a}³ − 3(${a})²(${b}) + 3(${a})(${b})² − ${b}³`;
+  }
+
+  document.getElementById("pasos").innerHTML=
+    `<div class="formula">${termino}</div>
+     <p style="text-align:center;font-size:1.15rem">
+     <b>Resultado numérico: ${valor}</b></p>`;
+}
+
+function evaluar(){
+  let puntos=0;
+  if(document.querySelector('input[name="q1"]:checked')?.value==="a") puntos++;
+  if(document.querySelector('input[name="q2"]:checked')?.value==="a") puntos++;
+  if(document.querySelector('input[name="q3"]:checked')?.value==="a") puntos++;
+
+  document.getElementById("nota").textContent=
+    `Obtuviste ${puntos} de 3 respuestas correctas.`;
+}
+
+window.addEventListener("scroll",()=>{
+  const doc=document.documentElement;
+  const porcentaje=(doc.scrollTop/(doc.scrollHeight-doc.clientHeight))*100;
+  document.getElementById("progress").style.width=porcentaje+"%";
+});
+</script>
+
+</body>
+</html>
